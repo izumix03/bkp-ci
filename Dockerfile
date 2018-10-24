@@ -15,4 +15,9 @@ RUN gometalinter --install && curl -OL https://github.com/google/protobuf/releas
 && sudo mv protoc3/bin/* /usr/local/bin/\
 && sudo mv protoc3/include/* /usr/local/include/\
 && sudo chown circleci /usr/local/bin/protoc\
-&& sudo chown -R circleci /usr/local/include/google\
+&& sudo chown -R circleci /usr/local/include/google
+
+RUN curl https://sdk.cloud.google.com | bash
+RUN /bin/bash -c "source /home/circleci/google-cloud-sdk/completion.bash.inc"
+RUN /bin/bash -c "source /home/circleci/google-cloud-sdk/path.bash.inc"
+ENV PATH $PATH:/home/circleci/google-cloud-sdk/bin
