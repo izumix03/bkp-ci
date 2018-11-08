@@ -16,6 +16,7 @@ RUN gometalinter --install && curl -OL https://github.com/google/protobuf/releas
 && sudo mv protoc3/include/* /usr/local/include/\
 && sudo chown circleci /usr/local/bin/protoc\
 && sudo chown -R circleci /usr/local/include/google
+RUN sudo apt-get -y install mysql-client
 
 RUN curl https://sdk.cloud.google.com | bash
 RUN /bin/bash -c "source /home/circleci/google-cloud-sdk/completion.bash.inc"
