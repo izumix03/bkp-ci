@@ -10,15 +10,13 @@ RUN go get github.com/golang/dep/cmd/dep \
    && go get github.com/rubenv/sql-migrate/...
 
 RUN sudo apt-get update
-RUN gometalinter --install && curl -OL https://github.com/google/protobuf/releases/download/v3.2.0/protoc-3.2.0-linux-x86_64.zip \
-&& unzip protoc-3.2.0-linux-x86_64.zip -d protoc3\
-&& sudo mv protoc3/bin/* /usr/local/bin/\
-&& sudo mv protoc3/include/* /usr/local/include/\
-&& sudo chown circleci /usr/local/bin/protoc\
-&& sudo chown -R circleci /usr/local/include/google
-RUN sudo apt-get -y install mysql-client
+RUN gometalinter --install \
+   && curl -OL https://github.com/google/protobuf/releases/download/v3.2.0/protoc-3.2.0-linux-x86_64.zip \
+   && unzip protoc-3.2.0-linux-x86_64.zip -d protoc3\
+   && sudo mv protoc3/bin/* /usr/local/bin/\
+   && sudo mv protoc3/include/* /usr/local/include/\
+   && sudo chown circleci /usr/local/bin/protoc
 
-RUN curl https://sdk.cloud.google.com | bash
-RUN /bin/bash -c "source /home/circleci/google-cloud-sdk/completion.bash.inc"
-RUN /bin/bash -c "source /home/circleci/google-cloud-sdk/path.bash.inc"
-ENV PATH $PATH:/home/circleci/google-cloud-sdk/bin
+RUN sudo apt-get -y install mysql-client \
+   && sudo apt-get install ruby-full \
+   && sudo gem install bundler
