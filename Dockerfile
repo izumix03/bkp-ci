@@ -6,7 +6,9 @@ RUN go get github.com/golang/dep/cmd/dep \
     && go get github.com/grpc-ecosystem/go-grpc-middleware/validator \
     && go get github.com/mwitkow/go-proto-validators \
     && go get github.com/mwitkow/go-proto-validators/protoc-gen-govalidators \
-    && go get github.com/rubenv/sql-migrate/...
+    && go get github.com/rubenv/sql-migrate/... \
+    && go get github.com/golang/mock/gomock \
+    && go install github.com/golang/mock/mockgen
 
 RUN GIT_TAG="v1.2.0" \
     && go get -d -u github.com/golang/protobuf/protoc-gen-go \
